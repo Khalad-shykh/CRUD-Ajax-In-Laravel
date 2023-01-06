@@ -75,7 +75,7 @@ class ProductsController extends Controller
                           </div>
                           <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" id="save" data-id="'.$product->id.'" >Save</button>
+                              <button type="button" class="btn btn-primary" id="update" data-id="'.$product->id.'" >Update</button>
                           </div>
                       </div>
                   </div>';

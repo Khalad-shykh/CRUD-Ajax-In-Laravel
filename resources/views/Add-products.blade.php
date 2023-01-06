@@ -45,6 +45,9 @@
                       <div class="form-group">
                         <input type="number" class="form-control" name="" id="p_quantity" aria-describedby="helpId" placeholder="Enter Product Quantity">
                       </div>
+                      <div id="loader" class="spinner-border text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -64,10 +67,12 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
+                <div id="loader1" class="spinner-border text-success ml-3" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div> 
                 <div class="modal-body" id="set">
-
+                     
                 </div>
-                
             </div>
         </div>
     </div>
