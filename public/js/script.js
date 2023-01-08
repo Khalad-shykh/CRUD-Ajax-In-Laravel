@@ -1,30 +1,38 @@
 $(document).ready(function () {
-    $("#loader").hide();
-    $("#loader1").hide();
+    // Action On Modal Open For Adding
+    $("#AddModel").on("click", function () {
+        $("#MyModal").modal().show();
+        $("#p_name").val("");
+        $("#p_price").val("");
+        $("#p_quantity").val("");
+        $("#category").show();
+        $("#update").hide()
+        $("#save").show()
+        // Action On Modal Open For Adding End
+    });
+    //loading Data Tables
     $('#dt').DataTable({
         "sAjaxSource": 'ViewProducts',
     });
+    // setting Up ajax
     $.ajaxSetup({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
     });
+    // Adding Data Using Ajax
     $("#save").on('click', function () {
 
         let p_name = $("#p_name").val();
         let p_price = $("#p_price").val();
         let p_quantity = $("#p_quantity").val();
+        let c_id = $("#category").find(":selected").val()
         $.ajax({
             type: "POST",
             url: "AddProducts",
-            beforeSend: function () {
-                $("#loader").show();
-            },
-            complete: function () {
-                $("#loader").hide();
-            },
             data: {
                 p_name: p_name,
                 p_price: p_price,
-                p_quantity: p_quantity
+                p_quantity: p_quantity,
+                c_id: c_id
             },
             success: function (response) {
                 $('#dt').DataTable().ajax.reload();
@@ -33,45 +41,45 @@ $(document).ready(function () {
                     $("#p_name").val("");
                     $("#p_price").val("");
                     $("#p_quantity").val("");
-                    $("#modelId").modal("hide");
+                    $("#MyModal").modal("hide");
                     $("#success-alert").addClass("show");
                 }
 
             }
         });
     });
+    // Adding Data Using Ajax End
+    // Loading Data Using Ajax For Update 
     $(document).on("click", "#update_btn", function () {
         let id = $(this).data("id");
+        $("#MyModal").modal().show();
         $.ajax({
             type: "POST",
-            url: "LoadModal",
-            beforeSend: function () {
-                $("#loader1").show();
-            },
-            complete: function () {
-                $("#loader1").hide();
-            },
+            url: "GetValues",
             data: { id: id },
             success: function (response) {
                 let res = $.parseJSON(response);
-                $("#set").html(res['Modal']);
+                $(".modal-title").html("Update Products");
+                $("#save").hide();
+                $("#update").show()
+                $("#p_name").val(res['p_name']);
+                $("#p_price").val(res['p_price']);
+                $("#p_quantity").val(res['p_quantity']);
+                $("#p_id").val(res['p_id']);
+                $("#category").hide();
             }
         });
     });
-    $(document).on('click', '#update', function () {
-        let id = $(this).data('id');
-        let u_p_name = $("#u_p_name").val();
-        let u_p_price = $("#u_p_price").val();
-        let u_p_quantity = $("#u_p_quantity").val();
+    // Loading Data Using Ajax For Update end
+    // Updating Data Using Ajax 
+    $('#update').on('click', function () {
+        let id = $("#p_id").val();
+        let u_p_name = $("#p_name").val();
+        let u_p_price = $("#p_price").val();
+        let u_p_quantity = $("#p_quantity").val();
         $.ajax({
             url: 'UpdateProducts',
             type: 'POST',
-            beforeSend: function () {
-                $("#loader1").show();
-            },
-            complete: function () {
-                $("#loader1").hide();
-            },
             data: {
                 id: id,
                 u_p_name: u_p_name,
@@ -83,7 +91,7 @@ $(document).ready(function () {
                 if (res['msg'] == 'Success') {
                     $('#dt').DataTable().ajax.reload();
                     let res = $.parseJSON(response)
-                    $("#Update_Modal").modal("hide");
+                    $("#MyModal").modal("hide");
                 }
                 else {
                     alert(res['msg']);
@@ -92,6 +100,8 @@ $(document).ready(function () {
             }
         });
     });
+    // Updating Data Using Ajax End
+    // Deleting Data Using Ajax 
     $(document).on("click", "#delete", function () {
         let id = $(this).data("id");
         let action = confirm("Are You Sure To Delete ?")
@@ -112,4 +122,5 @@ $(document).ready(function () {
             });
         }
     });
+    // Deleting Data Using Ajax End
 });

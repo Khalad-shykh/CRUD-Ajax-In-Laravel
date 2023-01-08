@@ -13,7 +13,7 @@
   <body>
       
     <!-- ###################### Add Modal Button ################## -->
-    <button type="button" class="btn-sm btn-success btn-lg" data-toggle="modal" data-target="#modelId">
+    <button type="button" class="btn-sm btn-success btn-lg" data-toggle="modal" id="AddModel">
       Add Products
     </button>
     {{-- ###################### Success Alert ################## --}}
@@ -25,8 +25,8 @@
     <strong>Data Succesfully Added</strong>
 </div>
     {{-- ###################### Success Alert End ################## --}}
-{{-- ################################ Add Modal ################################## --}}
-    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+{{-- ################################ Modal ################################## --}}
+    <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -37,6 +37,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                      <input type="hidden" value="" id="p_id">
                       <input type="text" class="form-control" name="" id="p_name" aria-describedby="helpId" placeholder="Enter Product Name">
                     </div>
                     <div class="form-group">
@@ -45,45 +46,34 @@
                       <div class="form-group">
                         <input type="number" class="form-control" name="" id="p_quantity" aria-describedby="helpId" placeholder="Enter Product Quantity">
                       </div>
-                      <div id="loader" class="spinner-border text-success" role="status">
-                        <span class="sr-only">Loading...</span>
+                      <div class="form-group">
+                    <div class="form-group">
+                      <label for="">Select Category : </label>
+                      <select class="form-control" id="category">
+                        @foreach ($categories as $c)
+                        <option value="{{$c->cat_id}}">{{$c->cat_name}}</option>
+                        @endforeach
+                        
+                      </select>
+                    </div>
                       </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="save">Save</button>
+                    <button type="button" class="btn btn-primary" id="save" >Save</button>
+                    <button type="button" class="btn btn-primary" id="update" >Update</button>
                 </div>
             </div>
         </div>
     </div>
-    {{-- ################################ Add Modal End################################## --}}
-    {{-- ################################ Update Modal ################################## --}}
-    <div class="modal fade" id="Update_Modal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Update Products</h5>
-                        <button type="button" class="close" id="hide" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                </div>
-                <div id="loader1" class="spinner-border text-success ml-3" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div> 
-                <div class="modal-body" id="set">
-                     
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- ################################ Update Modal End################################## --}}
+    {{-- ################################ Modal End################################## --}}
     <table id="dt" class="display">
         <thead>
             <tr>
-                <th>name</th>
-                <th>Price</th>
-				<th>Quantity</th>
-                <th>Action</th>
+<th>name</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Action</th>
             </tr>
         </thead>
         <tbody>

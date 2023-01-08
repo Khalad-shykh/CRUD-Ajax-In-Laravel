@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\product;
-
+use App\Models\category;
 class ProductsController extends Controller
 {
     public function show()
     {
-        return view('Add-products');
+        $categories = category::all();
+        return view('Add-products')->with('categories',$categories);
         
     }
     
@@ -19,6 +20,7 @@ class ProductsController extends Controller
         $product->p_name = $req->p_name;
         $product->p_price = $req->p_price;
         $product->p_quantity = $req->p_quantity;
+        $product->cat_id = $req->c_id;
         $result = $product->save();
         if($result)
         {
@@ -39,7 +41,7 @@ class ProductsController extends Controller
             {
                 $TableData[] = array(
                     $p->p_name,$p->p_price,$p->p_quantity,'
-                    <button class="btn-sm btn-primary" id="update_btn"  data-toggle="modal"   data-target="#Update_Modal" data-id="'.$p->id.'">update</button>|<button class="btn-sm btn-danger" id="delete" data-id="'.$p->id.'">X</button>'
+                    <button class="btn-sm btn-primary" id="update_btn"  data-toggle="modal" data-id="'.$p->id.'">update</button>|<button class="btn-sm btn-danger" id="delete" data-id="'.$p->id.'">X</button>'
                 );
             }
             $response = array();
@@ -57,30 +59,14 @@ class ProductsController extends Controller
             echo json_encode($response);
         }
     }
-    public function LoadModal(Request $req)
+    public function GetValues(Request $req)
     {
-        $product = product::find($req->id);
-        if($product->count()>0)
-        {
-            $Modal = '
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="'.$product->p_name.'" name="" id="u_p_name" aria-describedby="helpId" placeholder="Enter Product Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" name="" value="'.$product->p_price.'" id="u_p_price" aria-describedby="helpId" placeholder="Enter Product Price">
-                          </div>
-                          <div class="form-group">
-                            <input type="number" class="form-control" name="" value="'.$product->p_quantity.'" id="u_p_quantity" aria-describedby="helpId" placeholder="Enter Product Quantity">
-                          </div>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" id="update" data-id="'.$product->id.'" >Update</button>
-                          </div>
-                      </div>
-                  </div>';
+         $product = product::find($req->id);
+         if($product->count()>0)
+         {
+            echo json_encode(array("p_id"=>$product->id,"p_name"=>$product->p_name,"p_price"=>$product->p_price,"p_quantity"=>$product->p_quantity,"cat_id"=>$product->cat_id));
         }
-        echo json_encode(array('Modal'=>$Modal));
+        
     }
     public function UpdateProducts(Request $req){
 

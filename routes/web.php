@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::get('AddProducts', [ProductsController::class, 'show']);
 Route::post('AddProducts', [ProductsController::class, 'CreateProducts']);
 Route::get('ViewProducts', [ProductsController::class, 'ViewProducts']);
-Route::post('LoadModal', [ProductsController::class, 'LoadModal']);
+Route::post('GetValues', [ProductsController::class, 'GetValues']);
 Route::post('UpdateProducts', [ProductsController::class, 'UpdateProducts']);
 Route::post('DeleteProducts', [ProductsController::class, 'DeleteProducts']);
+Route::get('test', function(){
+    return view('test');
+});
