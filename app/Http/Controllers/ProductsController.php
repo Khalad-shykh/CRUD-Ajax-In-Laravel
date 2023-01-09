@@ -75,6 +75,7 @@ class ProductsController extends Controller
         $product->p_name = $req->u_p_name;
         $product->p_price = $req->u_p_price;
         $product->p_quantity = $req->u_p_quantity;
+        $product->cat_id = $req->c_id;
         $result = $product->save();
         if($result)
         {

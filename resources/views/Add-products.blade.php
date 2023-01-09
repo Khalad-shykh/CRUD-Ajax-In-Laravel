@@ -7,23 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }} ">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="{{ url("DataTables/css/jquery.dataTables.min.css") }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-      
+      <div class="container border p-5">
+        <div class="col-md-12 btn-dark p-1"><h3 class="text-center">CRUD With Ajax</h3></div>
+        
     <!-- ###################### Add Modal Button ################## -->
-    <button type="button" class="btn-sm btn-success btn-lg" data-toggle="modal" id="AddModel">
+    <button type="button" class="btn-sm btn-success btn-lg m-3" data-toggle="modal" id="AddModel">
       Add Products
     </button>
-    {{-- ###################### Success Alert ################## --}}
-<div class="alert alert-success alert-dismissible fade " role="alert" id="success-alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        <span class="sr-only">Close</span>
-    </button>
-    <strong>Data Succesfully Added</strong>
-</div>
     {{-- ###################### Success Alert End ################## --}}
 {{-- ################################ Modal ################################## --}}
     <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -36,6 +30,7 @@
                         </button>
                 </div>
                 <div class="modal-body">
+                  <form id="MyForm">
                     <div class="form-group">
                       <input type="hidden" value="" id="p_id">
                       <input type="text" class="form-control" name="" id="p_name" aria-describedby="helpId" placeholder="Enter Product Name">
@@ -56,6 +51,7 @@
                         
                       </select>
                     </div>
+                  </form>
                       </div>
                 </div>
                 <div class="modal-footer">
@@ -80,12 +76,13 @@
             
         </tbody>
     </table>
+      </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     
     <script src="{{asset('js/jQuery.js')}}"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="{{asset("DataTables/js/jquery.dataTables.min.js")}}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="{{asset('js/script.js')}}"></script>  
 </body>

@@ -1,11 +1,8 @@
-$(document).ready(function () {
+$(document).ready(function () { 
     // Action On Modal Open For Adding
     $("#AddModel").on("click", function () {
         $("#MyModal").modal().show();
-        $("#p_name").val("");
-        $("#p_price").val("");
-        $("#p_quantity").val("");
-        $("#category").show();
+        $("#MyForm").trigger("reset");
         $("#update").hide()
         $("#save").show()
         // Action On Modal Open For Adding End
@@ -42,7 +39,7 @@ $(document).ready(function () {
                     $("#p_price").val("");
                     $("#p_quantity").val("");
                     $("#MyModal").modal("hide");
-                    $("#success-alert").addClass("show");
+                    alert("Item Added");
                 }
 
             }
@@ -66,7 +63,7 @@ $(document).ready(function () {
                 $("#p_price").val(res['p_price']);
                 $("#p_quantity").val(res['p_quantity']);
                 $("#p_id").val(res['p_id']);
-                $("#category").hide();
+                $("#category").val(res['cat_id']);
             }
         });
     });
@@ -77,6 +74,7 @@ $(document).ready(function () {
         let u_p_name = $("#p_name").val();
         let u_p_price = $("#p_price").val();
         let u_p_quantity = $("#p_quantity").val();
+        let c_id = $("#category").find(":selected").val()
         $.ajax({
             url: 'UpdateProducts',
             type: 'POST',
@@ -84,7 +82,8 @@ $(document).ready(function () {
                 id: id,
                 u_p_name: u_p_name,
                 u_p_price: u_p_price,
-                u_p_quantity: u_p_quantity
+                u_p_quantity: u_p_quantity,
+                c_id:c_id
             },
             success: function (response) {
                 let res = $.parseJSON(response)
@@ -92,6 +91,7 @@ $(document).ready(function () {
                     $('#dt').DataTable().ajax.reload();
                     let res = $.parseJSON(response)
                     $("#MyModal").modal("hide");
+                    alert("Item Updated");
                 }
                 else {
                     alert(res['msg']);
