@@ -39,7 +39,7 @@ $(document).ready(function () {
                     $("#p_price").val("");
                     $("#p_quantity").val("");
                     $("#MyModal").modal("hide");
-                    alert("Item Added");
+                    swal("Good job!", "Item Added Successfully", "success");
                 }
 
             }
@@ -90,8 +90,8 @@ $(document).ready(function () {
                 if (res['msg'] == 'Success') {
                     $('#dt').DataTable().ajax.reload();
                     let res = $.parseJSON(response)
-                    $("#MyModal").modal("hide");
-                    alert("Item Updated");
+                    $("#MyModal").modal("hide");;
+                    swal("Good job!", "Item Updated Successfully", "success");
                 }
                 else {
                     alert(res['msg']);
@@ -104,23 +104,31 @@ $(document).ready(function () {
     // Deleting Data Using Ajax 
     $(document).on("click", "#delete", function () {
         let id = $(this).data("id");
-        let action = confirm("Are You Sure To Delete ?")
-        if (action) {
-            $.ajax({
-                type: "POST",
-                url: "DeleteProducts",
-                data: { id: id },
-                success: function (response) {
-                    let res = $.parseJSON(response)
-                    if (res['msg'] == 'success') {
-                        $("#dt").DataTable().ajax.reload();
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: "DeleteProducts",
+                    data: { id: id },
+                    success: function (response) {
+                        let res = $.parseJSON(response)
+                        if (res['msg'] == 'success') {
+                            $("#dt").DataTable().ajax.reload();
+                        }
+                        else {
+                            alert(res['msg']);
+                        }
                     }
-                    else {
-                        alert(res['msg']);
-                    }
-                }
-            });
-        }
+                });
+            }
+          });
     });
     // Deleting Data Using Ajax End
 });

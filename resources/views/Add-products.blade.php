@@ -12,7 +12,7 @@
   </head>
   <body>
       <div class="container border p-5">
-        <div class="col-md-12 btn-dark p-1"><h3 class="text-center">CRUD With Ajax</h3></div>
+        <div class="col-md-12 btn-dark p-1 rounded"><h3 class="text-center">CRUD With Ajax</h3></div>
         
     <!-- ###################### Add Modal Button ################## -->
     <button type="button" class="btn-sm btn-success btn-lg m-3" data-toggle="modal" id="AddModel">
@@ -83,6 +83,7 @@
     
     <script src="{{asset('js/jQuery.js')}}"></script>
     <script type="text/javascript" charset="utf8" src="{{asset("DataTables/js/jquery.dataTables.min.js")}}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="{{asset('js/script.js')}}"></script>  
 </body>
