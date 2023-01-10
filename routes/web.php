@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductsController;
 
 /*
@@ -23,6 +24,8 @@ Route::get('ViewProducts', [ProductsController::class, 'ViewProducts']);
 Route::post('GetValues', [ProductsController::class, 'GetValues']);
 Route::post('UpdateProducts', [ProductsController::class, 'UpdateProducts']);
 Route::post('DeleteProducts', [ProductsController::class, 'DeleteProducts']);
+Route::get('ImageUpload',[ImageController::class , 'show']);
+Route::post('ImageUpload',[ImageController::class , 'Upload'])->name('store');
 Route::get('test', function(){
     return view('test');
 });

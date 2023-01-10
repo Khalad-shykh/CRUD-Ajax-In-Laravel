@@ -1,4 +1,5 @@
 $(document).ready(function () { 
+
     // Action On Modal Open For Adding
     $("#AddModel").on("click", function () {
         $("#MyModal").modal().show();
@@ -131,4 +132,5 @@ $(document).ready(function () {
           });
     });
     // Deleting Data Using Ajax End
+
 });
