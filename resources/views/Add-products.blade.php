@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url("DataTables/css/jquery.dataTables.min.css") }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url('css/style.css')}}">
   </head>
   <body>
       <div class="container border p-5">
@@ -20,11 +21,11 @@
     </button>
     {{-- ###################### Success Alert End ################## --}}
 {{-- ################################ Modal ################################## --}}
-    <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fixed-left fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-aside" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Products</h5>
+                    <h5 class="modal-title"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -69,6 +70,7 @@
 <th>name</th>
 <th>Price</th>
 <th>Quantity</th>
+<th>Category</th>
 <th>Action</th>
             </tr>
         </thead>

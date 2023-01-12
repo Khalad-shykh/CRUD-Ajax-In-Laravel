@@ -34,13 +34,15 @@ class ProductsController extends Controller
     }
     public function ViewProducts()
     {
-        $products = product::all();
+        $products = product::select('*')
+        ->join('categories', 'categories.cat_id', '=', 'products.cat_id')
+        ->get();
         if($products->count()>0)
         {
             foreach($products as $p)
             {
                 $TableData[] = array(
-                    $p->p_name,$p->p_price,$p->p_quantity,'
+                    $p->p_name,$p->p_price,$p->p_quantity, $p->cat_name,'
                     <button class="btn-sm btn-primary" id="update_btn"  data-toggle="modal" data-id="'.$p->id.'">update</button>|<button class="btn-sm btn-danger" id="delete" data-id="'.$p->id.'">X</button>'
                 );
             }

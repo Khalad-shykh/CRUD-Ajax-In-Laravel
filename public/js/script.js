@@ -3,6 +3,7 @@ $(document).ready(function () {
     // Action On Modal Open For Adding
     $("#AddModel").on("click", function () {
         $("#MyModal").modal().show();
+        $(".modal-title").html("Add Products");
         $("#MyForm").trigger("reset");
         $("#update").hide()
         $("#save").show()
@@ -91,7 +92,7 @@ $(document).ready(function () {
                 if (res['msg'] == 'Success') {
                     $('#dt').DataTable().ajax.reload();
                     let res = $.parseJSON(response)
-                    $("#MyModal").modal("hide");;
+                    $("#MyModal").modal("hide");
                     swal("Good job!", "Item Updated Successfully", "success");
                 }
                 else {
