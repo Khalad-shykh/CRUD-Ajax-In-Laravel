@@ -26,6 +26,7 @@ Route::post('UpdateProducts', [ProductsController::class, 'UpdateProducts']);
 Route::post('DeleteProducts', [ProductsController::class, 'DeleteProducts']);
 Route::get('ImageUpload',[ImageController::class , 'show']);
 Route::post('ImageUpload',[ImageController::class , 'Upload'])->name('store');
+Route::get('ImageView', [ImageController::class , 'ImageView']);
 Route::get('test', function(){
     return view('test');
 });

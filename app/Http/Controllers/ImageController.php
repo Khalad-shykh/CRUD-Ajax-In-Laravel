@@ -32,4 +32,19 @@ class ImageController extends Controller
         }
         echo json_encode(array('status_code'=>$status_code,'msg'=>$msg));
     }
+
+    public function ImageView(){
+        $images = image::orderBy("img_id","desc")->get();
+        $data = "";
+        if($images->count() > 0){
+             foreach($images as $item){
+                $data .= '<tr>
+            <td>'.$item->img_id.'</td>
+            <td><img src="'. url("images/".$item->image_path).'" height="50px"></td>
+            <td><button class="btn-sm btn-danger">X</button></td>
+            </tr>';
+            }
+        }
+        echo json_encode(array("data"=>$data));
+    }
 }

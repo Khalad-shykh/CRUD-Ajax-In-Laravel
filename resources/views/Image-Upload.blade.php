@@ -23,9 +23,22 @@
         </div>
       </div>
 </form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="rows">
+    </tbody>
+</table>
     </div>
     <script src="{{asset('js/jQuery.js')}}"></script>
     <script>  
+    $(document).ready(function () {
+        loadData();
         $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -54,6 +67,7 @@ $("#ImgForm").on("submit", function (e) {
             if(res['status_code'] == 200){
                 alert(res['msg']);
                 $("#ImgForm").trigger("reset");
+                loadData();
             }
             
         },
@@ -61,7 +75,20 @@ $("#ImgForm").on("submit", function (e) {
             $('#image-input-error').text(response.responseJSON.message);
                 }
     });
+    
 });
+function loadData(){
+        $.ajax({
+            type: "GET",
+            url: "ImageView",
+            success: function (response) {
+                let res = $.parseJSON(response);
+                // alert();
+                $(".rows").html(res['data']);
+            }
+        });
+    }
+    });
     </script>  
   </body>
 </html>
