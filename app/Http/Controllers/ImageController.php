@@ -14,7 +14,7 @@ class ImageController extends Controller
     public function Upload(Request $req)
     {
         $req->validate(
-            ['img' => 'required|image|mimes:png,jpg']
+            ['img' => 'required|mimes:png,jpg']
         );
         $imageName = time().'.'.$req->img->extension();
         $image = new image;

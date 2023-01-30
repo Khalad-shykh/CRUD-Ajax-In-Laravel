@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductsController;
 
 /*
@@ -27,6 +28,10 @@ Route::post('DeleteProducts', [ProductsController::class, 'DeleteProducts']);
 Route::get('ImageUpload',[ImageController::class , 'show']);
 Route::post('ImageUpload',[ImageController::class , 'Upload'])->name('store');
 Route::get('ImageView', [ImageController::class , 'ImageView']);
+Route::get('AddCategory',[CategoryController::class,'show']);
+Route::post('AddCategory',[CategoryController::class,'AddCategory']);
+Route::get('ViewCategories',[CategoryController::class,'ViewCategories']);
+Route::get('DelCategories',[CategoryController::class,'DelCategories']);
 Route::get('test', function(){
     return view('test');
 });

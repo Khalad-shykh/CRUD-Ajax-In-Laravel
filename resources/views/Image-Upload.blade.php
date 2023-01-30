@@ -73,6 +73,9 @@ $("#ImgForm").on("submit", function (e) {
         },
         error: function(response){
             $('#image-input-error').text(response.responseJSON.message);
+            // $.each(response.responseJSON, function (key, val) { 
+            //      console.log(val.img)
+            // });
                 }
     });
     
