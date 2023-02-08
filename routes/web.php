@@ -28,6 +28,7 @@ Route::post('DeleteProducts', [ProductsController::class, 'DeleteProducts']);
 Route::get('ImageUpload',[ImageController::class , 'show']);
 Route::post('ImageUpload',[ImageController::class , 'Upload'])->name('store');
 Route::get('ImageView', [ImageController::class , 'ImageView']);
+Route::get('DelImg', [ImageController::class , 'DelImg']);
 Route::get('AddCategory',[CategoryController::class,'show']);
 Route::post('AddCategory',[CategoryController::class,'AddCategory']);
 Route::get('ViewCategories',[CategoryController::class,'ViewCategories']);

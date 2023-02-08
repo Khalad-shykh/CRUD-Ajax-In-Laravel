@@ -70,6 +70,7 @@
 <th>name</th>
 <th>Price</th>
 <th>Quantity</th>
+<th>Total Price</th>
 <th>Category</th>
 <th>Action</th>
             </tr>

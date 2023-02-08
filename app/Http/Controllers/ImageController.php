@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\image;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ImageController extends Controller
 {
@@ -41,10 +42,21 @@ class ImageController extends Controller
                 $data .= '<tr>
             <td>'.$item->img_id.'</td>
             <td><img src="'. url("images/".$item->image_path).'" height="50px"></td>
-            <td><button class="btn-sm btn-danger">X</button></td>
+            <td><button id="del_img" class="btn-sm btn-danger" data-id="'.$item->img_id.'">X</button></td>
             </tr>';
             }
         }
         echo json_encode(array("data"=>$data));
+    }
+    public function DelImg(Request $req){
+        $images = image::find($req->img_id);
+        $destination = "images/".$images->image_path;
+        if(File::exists($destination)){
+            if(File::delete($destination)){
+                $images->delete();
+            echo json_encode(array("StatusCode" => 200,"msg" => "Data Deleted"));
+            }
+            
+        }
     }
 }

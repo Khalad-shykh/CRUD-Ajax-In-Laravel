@@ -42,7 +42,7 @@ class ProductsController extends Controller
             foreach($products as $p)
             {
                 $TableData[] = array(
-                    $p->p_name,$p->p_price,$p->p_quantity, $p->cat_name,'
+                    $p->p_name,$p->p_price,$p->p_quantity,$p->p_price*$p->p_quantity,$p->cat_name,'
                     <button class="btn-sm btn-primary" id="update_btn"  data-toggle="modal" data-id="'.$p->id.'">update</button>|<button class="btn-sm btn-danger" id="delete" data-id="'.$p->id.'">X</button>'
                 );
             }

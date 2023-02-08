@@ -78,8 +78,25 @@ $("#ImgForm").on("submit", function (e) {
             // });
                 }
     });
-    
 });
+$(document).on("click","#del_img", function () {
+        img_id = $(this).data("id");
+        $.ajax({
+            type: "GET",
+            url: "DelImg",
+            data: {img_id:img_id},
+            success: function (response) {
+                let res = $.parseJSON(response);
+                if(res["StatusCode"]==200){
+                    alert(res["msg"]);
+                    loadData();
+                }
+            },
+            error:function(response){
+                console.log(response);
+            }
+        });
+    });
 function loadData(){
         $.ajax({
             type: "GET",
